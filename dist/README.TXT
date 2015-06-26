@@ -51,6 +51,6 @@ choose Properties. Then click Run and enter the
 
 Alternatively, you can manually 
 type the
-class name in the manifest Main-Class element.
+class name in the manifest Main-Class element.  rd
 
 Greatings :D 
