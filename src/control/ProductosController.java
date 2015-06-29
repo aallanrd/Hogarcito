@@ -145,6 +145,37 @@ public  class ProductosController implements Inter_Vista {
         return miArray;
     }
 
+    public ArrayList<ModelProductos> getAllProductsBy(String x) {
+        ArrayList<ModelProductos> miArray = new ArrayList<>();
+        try {
+            ResultSet rs = conexion.getStatement().executeQuery("select * from productos where nombre LIKE '%"+ x+"%';");
+            while (rs.next()) {
+
+                ModelProductos miPrduct = new ModelProductos();
+                // read the result set
+                try {
+                    miPrduct.setIdProducto(rs.getString("idProducto"));
+                    miPrduct.setNombre(rs.getString("nombre"));
+                    miPrduct.setDescripcion(rs.getString("descripcion"));
+                    miPrduct.setCantidad(rs.getString("cantidad"));
+                    miPrduct.setUnidad_medida(rs.getString("unidad_medida"));
+                    miPrduct.setCantidad_minima(rs.getString("cantidadMinima"));
+                    miPrduct.setCantidad_maxima(rs.getString("cantidadMaxima"));
+                 
+                    miPrduct.setUsuario_registra(rs.getString("usuario_registra"));
+                    miPrduct.setUsuario_actualiza(rs.getString("usuario_actualiza"));
+
+                    miArray.add(miPrduct);
+
+                } catch (Exception e) {
+                  
+                }
+            }
+        } catch (Exception e) {
+         
+        }
+        return miArray;
+    }
     @Override
     public boolean editCantidad(double cant, String id) {
 

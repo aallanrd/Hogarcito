@@ -20,5 +20,7 @@ public interface Inter_Vista {
     public ArrayList<ModelProductos> getAllProducts();
     public boolean editCantidad(double cant, String id);
     public boolean delete(String id);
+    public ArrayList<ModelProductos> getAllProductsBy(String i);  
     
+
 }
