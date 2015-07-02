@@ -6,9 +6,13 @@
 package view;
 
 import control.Inter_Vista;
+import control.PrintReport;
 import control.ProductosController;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ModelProductos;
 
 /**
@@ -55,6 +59,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -682,6 +687,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem5.setText("Imprimir Inventario");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reportes");
@@ -754,6 +767,10 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1KeyTyped
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    imprimir();    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -801,6 +818,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -891,4 +909,30 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+  private void imprimir() {
+       
+        JFileChooser file = new JFileChooser();
+
+        FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
+                "pdf files (*.pdf)", "pdf");
+        file.setFileFilter(xmlfilter);
+        file.setDialogTitle("Open schedule file");
+// set selected filter
+        file.setFileFilter(xmlfilter);
+        
+        
+        
+        file.showOpenDialog(this);
+        File abre = file.getSelectedFile();
+        if (abre != null) {
+            
+            boolean path = abre.getAbsolutePath().contains(".pdf");
+            if (path) {
+                new PrintReport(abre.getAbsolutePath(),jTable1);
+            } else {
+                new PrintReport(abre.getAbsolutePath()+".pdf",jTable1);
+            }
+        }
+
+}   
 }
